@@ -48,6 +48,8 @@ Then copy the `entrypoint.sh` into the image and make it executable. Because the
 For the `entrypoint.sh` script to execute some of the commands you need to download the Wordpress CLI. Then the Entrypoint is set.
 Last but not least start apache in foreground, this ensures that the web server is running and the container is not immediately terminated.
 
+With the `docker-compose.yml` the execution of a docker container gets a lot more pleasant because 
+
 
 
 
