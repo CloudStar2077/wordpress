@@ -45,9 +45,7 @@ This contains the Wordpress Core installation including the creation of the admi
 
 The `Dockerfile` pulls a Wordpress base image. The WORKDIR is set to the default Wordpress directory `/var/www/html`, This ensures that all subsequent commands are executed in this path.
 Then copy the `entrypoint.sh` into the image and make it executable. Because the installation of some required packages may consume additional memory, increase limit to 512 MB.
-
 For the `entrypoint.sh` script to execute some of the commands you need to download the Wordpress CLI. Then the Entrypoint is set.
-
 Last but not least start apache in foreground, this ensures that the web server is running and the container is not immediately terminated.
 
 
