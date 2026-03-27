@@ -1,26 +1,27 @@
+# Base Image 
 FROM wordpress:latest
 
-# Arbeitsverzeichnis auf den Webserver-Root setzen
+# Set Working Directory 
 WORKDIR /var/www/html
 
-# entrypoint.sh ins Image kopieren und ausführbar machen
+# Copy entrypoint.sh into the image and make it executable
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Memory Limit auf 512M erhöhen
+# Increase memory limit to 512M
 RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
-# MySQL-Client installieren (für WP-CLI DB-Checks)
+# Install MySQL client (for WP-CLI DB checks)
 RUN apt-get update && \
     apt-get install -y default-mysql-client curl && \
     rm -rf /var/lib/apt/lists/*
 
-# WP-CLI installieren
+# Install WP CLI
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x /usr/local/bin/wp
 
-    # eigenes entrypoint Skript setzen
+# Set own entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Standard CMD von WordPress beibehalten
+# Keep WordPress default CMD
 CMD ["apache2-foreground"]

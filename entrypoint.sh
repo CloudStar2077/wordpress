@@ -32,5 +32,5 @@ if ! wp core is-installed --allow-root; then
         --allow-root
 fi
 
-# 🔹 Apache starten
-exec apache2-foreground
+
+exec docker-entrypoint.sh "$@"

@@ -40,3 +40,5 @@ Open a web browser then enter the target destination to check accessibility
 
 ## Usage
 
+The `Dockerfile` pulls a Wordpress base image. Set the workdir to the default Wordpress directory `/var/www/html`
+
