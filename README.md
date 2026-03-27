@@ -48,7 +48,22 @@ Then copy the `entrypoint.sh` into the image and make it executable. Because the
 For the `entrypoint.sh` script to execute some of the commands you need to download the Wordpress CLI. Then the Entrypoint is set.
 Last but not least start apache in foreground, this ensures that the web server is running and the container is not immediately terminated.
 
-With the `docker-compose.yml` the execution of a docker container gets a lot more pleasant because 
+With the `docker-compose.yml` the execution of a docker container gets a lot more pleasant because long commands like this 
+```bash
+docker run --env-file .env \                                 # "--env-file" to pass the .env file when starting the container
+-d \                                                         # "-d" for detatch mode to run container in background
+-p 8025:8025 \                                               # "-p" for port mapping <HostPort>:<ContainerPort>
+-v /home/docker_volume_maps/data:/app/babyshop_app/data \    # "-v" for volume mapping <HostPath>:<ContainerPath>
+-v /home/docker_volume_maps/media:/app/babyshop_app/media \
+--name bts-app \                                             # "--name" for naming the container
+--restart unless-stopped \                                   # "--restart unless-stopped" for restarting the container after an error or crash
+bts-app:latest
+  ```
+are not necessary. Using YAML and Compose provides significantly better structure, readability, and ease of editing.
+
+For sensitive data there is the `.env`
+
+A `.dockerignore` and also a `.gitignore` to ignore all the files which doesnt belong into the container or repository.
 
 
 
