@@ -3,13 +3,13 @@ set -e
 
 echo "Starting WordPress Container..."
 
-# 🔹 WordPress-Core downloaden, falls noch nicht vorhanden
+# WordPress-Core download if not excisting
 if [ ! -f /var/www/html/index.php ]; then
     echo "Downloading WordPress..."
     wp core download --allow-root
 fi
 
-# 🔹 wp-config.php erstellen, falls noch nicht vorhanden
+# Create wp-config.php if not excisting
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "Creating wp-config..."
     wp config create \
@@ -20,7 +20,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --allow-root
 fi
 
-# 🔹 WordPress installieren, falls noch nicht installiert
+# Install WordPress if not installed
 if ! wp core is-installed --allow-root; then
     echo "Installing WordPress..."
     wp core install \
