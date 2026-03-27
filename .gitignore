@@ -17,6 +17,9 @@
 /wp-*.php
 /xmlrpc.php
 
+# Environment
+.env
+
 # Configuration
 wp-config.php
 

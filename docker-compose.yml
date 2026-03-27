@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mariadb:10.9
+    container_name: wordpress_db
+    restart: always
+    env_file: .env
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  wordpress:
+    build: .
+    container_name: wordpress_app
+    restart: always
+    ports:
+      - "8080:80"
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - wp_content:/var/www/html/wp-content
+    networks:
+      - wp_net
+
+volumes:
+  db_data:
+  wp_content:
+
+networks:
+  wp_net:
