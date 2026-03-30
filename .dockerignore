@@ -2,7 +2,8 @@
 node_modules
 vendor
 *.log
-*.env
+.env
+secrets/
 *.zip
 *.tar.gz
 
