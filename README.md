@@ -65,12 +65,11 @@ For sensitive data there is the `.env`
 
 A `.dockerignore` and also a `.gitignore` to ignore all the files which doesnt belong into the container or repository.
 
-Clone the repository `git@github.com:CloudStar2077/wordpress.git`
-
+Clone the repository 
 ```bash
+git clone git@github.com:CloudStar2077/wordpress.git
 cd wordpress
-  ```
-In the `examples.env` are the placeholders for the envoirement variables, replace it with yours and rename the file in .env before building and starting the containers.
+
 
 
 
