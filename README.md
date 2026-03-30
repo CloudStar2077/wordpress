@@ -70,7 +70,7 @@ Clone the repository `git@github.com:CloudStar2077/wordpress.git`
 ```bash
 cd wordpress
   ```
-In the èxamples.env are the placeholders for the envoirement variables, replace it with yours and rename the file in .env before building and starting the containers.
+In the `examples.env` are the placeholders for the envoirement variables, replace it with yours and rename the file in .env before building and starting the containers.
 
 
 
