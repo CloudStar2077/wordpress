@@ -22,8 +22,9 @@ QUICK START GUIDE
 git clone git@github.com:CloudStar2077/wordpress.git
 cd /wordpress
 mv example.env .env  # rename the example.env to .env
+mv secrets_example/ secrets
   ```
-Replace the Values in the `.env` with yours.
+Replace the Values in the `.env` and `secrets` with yours.
 
 - Build docker image
 ```bash
@@ -59,18 +60,34 @@ docker run --env-file .env \                                 # "--env-file" to p
 --restart unless-stopped \                                   # "--restart unless-stopped" for restarting the container after an error or crash
 bts-app:latest
   ```
-are not necessary. Using YAML and Compose provides significantly better structure, readability, and ease of editing.
+are not necessary. Using YAML and Compose provides significantly better structure, readability, and ease of editing. Furthermore there is a build in Healthcheck for the
+Database, because it might take longer to start,so that the app can run with all data.
 
-For sensitive data there is the `.env`
+For sensitive data there is the `secrets_example` directory, every Secret gets its own text file but only the Value without the key. The envoirement variables are stored in the `example.env`
 
-A `.dockerignore` and also a `.gitignore` to ignore all the files which doesnt belong into the container or repository.
+To ignore all the files which doesn't belong into the container or repository, a `.dockerignore` and a `.gitignore` is setup.
+
 
 Clone the repository 
 ```bash
 git clone git@github.com:CloudStar2077/wordpress.git
 cd wordpress
+  ```
+Rename both, the `secrets_example` and `example.env` then edit them with your data
+```bash
+mv example.env .env
+mv secrets_example/ secrets
+ ```
 
-
+Build and run Containers 
+```bash
+docker compose build && docker compose up -d
+  ```
+Open a web browser and enter the target destination 
+```bash
+<your_IP>:8080/wp-admin
+  ```
+Login with the Admin User Credentilas you have added in the `secrets`.
 
 
 
