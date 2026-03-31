@@ -15,7 +15,6 @@ Setup a multi-container `compose.yml`, this includes the application and the dat
 
 ## Quickstart
 
-QUICK START GUIDE
 
 - Clone Repository
 ```bash
