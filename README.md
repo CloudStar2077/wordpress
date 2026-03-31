@@ -22,7 +22,7 @@ QUICK START GUIDE
 git clone git@github.com:CloudStar2077/wordpress.git
 cd /wordpress
 mv example.env .env  # rename the example.env to .env
-mv secrets_example/ secrets
+mv secrets_example/ secrets #rename the secrets_example to secrets
   ```
 Replace the Values in the `.env` and `secrets` with yours.
 
