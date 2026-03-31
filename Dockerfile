@@ -1,5 +1,5 @@
 # Base Image 
-FROM wordpress:latest
+FROM wordpress:6.9.4
 
 # Set Working Directory 
 WORKDIR /var/www/html
