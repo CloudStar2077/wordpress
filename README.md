@@ -24,6 +24,7 @@ mv example.env .env  # rename the example.env to .env
 mv secrets_example/ secrets  # rename the secrets_example to secrets
   ```
 Replace the Values in the `.env` and `secrets` with yours.
+For Example to adjust the admin user password set a value of your choice in the wp_admin_user.txt.
 
 - Build docker image
 ```bash
