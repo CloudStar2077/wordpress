@@ -3,7 +3,7 @@ services:
   db:
     image: mariadb:10.9
     container_name: wordpress_db
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -28,7 +28,7 @@ services:
   wordpress:
     build: .
     container_name: wordpress_app
-    restart: unless-stopped
+    restart: on-failure
     ports:
       - "8080:80"
     environment:
