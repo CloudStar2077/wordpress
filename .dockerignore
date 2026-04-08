@@ -1,0 +1,24 @@
+# Node / npm / composer / backup / IDE Files
+node_modules
+vendor
+*.log
+.env
+secrets/
+*.zip
+*.tar.gz
+
+# Docker 
+docker-compose.override.yml
+.dockerignore
+
+# WordPress Content
+wp-content/uploads
+wp-content/cache
+wp-content/backups
+wp-content/upgrade
+
+# Mac / Linux / Windows temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

@@ -1,0 +1,83 @@
+
+services:
+  db:
+    image: mariadb:10.9
+    container_name: wordpress_db
+    restart: on-failure
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_net
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MARIADB_DATABASE_FILE: /run/secrets/db_name
+      MARIADB_USER_FILE: /run/secrets/db_user
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_name
+      - db_user
+      - db_password
+      - db_root_password
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  wordpress:
+    build: .
+    container_name: wordpress_app
+    restart: on-failure
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_URL: /run/secrets/wp_url
+      WORDPRESS_TITLE: ${WORDPRESS_TITLE}
+      WORDPRESS_DB_NAME_FILE: /run/secrets/db_name
+      WORDPRESS_DB_USER_FILE: /run/secrets/db_user
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+      WORDPRESS_ADMIN_USER_FILE: /run/secrets/wp_admin_user
+      WORDPRESS_ADMIN_PASSWORD_FILE: /run/secrets/wp_admin_password
+      WORDPRESS_ADMIN_EMAIL_FILE: /run/secrets/wp_admin_email
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - wp_content:/var/www/html/wp-content
+    networks:
+      - wp_net
+    secrets:
+      - db_name
+      - db_user
+      - db_password
+      - wp_admin_user
+      - wp_admin_password
+      - wp_admin_email
+      - wp_url
+
+secrets:
+  db_name:
+    file: ./secrets/db_name.txt
+  db_user:
+    file: ./secrets/db_user.txt
+  db_password:
+    file: ./secrets/db_password.txt
+  db_root_password:
+    file: ./secrets/db_root_password.txt
+  wp_admin_user:
+    file: ./secrets/wp_admin_user.txt
+  wp_admin_password:
+    file: ./secrets/wp_admin_password.txt
+  wp_admin_email:
+    file: ./secrets/wp_admin_email.txt
+  wp_url:
+    file: ./secrets/wp_url.txt
+
+volumes:
+  db_data:
+  wp_content:
+
+networks:
+  wp_net:
